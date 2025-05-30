@@ -11,7 +11,7 @@ export const useLogout = () => {
       const result = await logoutUser();
       if (result.success) {
         // authUpdate(null);
-        authUpdate();
+        authUpdate(null);
         navigate("/login");
       }
     } catch (err) {

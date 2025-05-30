@@ -1,12 +1,14 @@
 import Home from "../components/body/bodyComponents/home";
 import { searchPost, loggedInUsers } from "../utils/axios-utils";
 import { useEffect, useState } from "react";
+import { useAuth } from "../utils/authContext";
 
 const HomeView = () => {
   const [post, setPost] = useState({ postList: [] });
   const [user, setUser] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const { authUpdate } = useAuth();
 
   const fetchPost = async (searchValue = "") => {
     try {
@@ -23,6 +25,7 @@ const HomeView = () => {
     try {
       const result = await loggedInUsers();
       setUser(result);
+      authUpdate(result);
     } catch (err) {
       setError(err.message || "Error fetching data");
     } finally {
@@ -33,7 +36,7 @@ const HomeView = () => {
   useEffect(() => {
     fetchPost();
     fetchActiveUser();
-  }, [user]);
+  }, []);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;

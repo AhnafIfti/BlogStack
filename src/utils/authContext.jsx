@@ -27,15 +27,15 @@ export const AuthProvider = ({ children }) => {
     // const authUpdate = async (user) => {
     //setIsAuthenticated(!!user);
     //setUser(user);
-    try {
-      const result = await checkAuth();
-      setIsAuthenticated(result.success);
-      setUser(result.user || null);
-    } catch (err) {
-      console.log(err);
-      setIsAuthenticated(false);
-      setUser(null);
-    }
+    // try {
+    //   const result = await checkAuth();
+    //   setIsAuthenticated(result.success);
+    //   setUser(result.user || null);
+    // } catch (err) {
+    //   console.log(err);
+    //   setIsAuthenticated(false);
+    //   setUser(null);
+    // }
     // setTrigger(true);
   };
 

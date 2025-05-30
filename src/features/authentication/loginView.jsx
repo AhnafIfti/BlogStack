@@ -12,7 +12,8 @@ const LoginView = () => {
       if (result.success) {
         // authUpdate(result.userId);
         authUpdate();
-        navigate(`/profile/${result.userId}`);
+        // navigate(`/profile/${result.userId}`);
+        navigate(`/home`);
       } else {
         console.error(result.message);
       }
