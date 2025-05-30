@@ -5,8 +5,10 @@ import PostView from "../../features/postView";
 import LoginView from "../../features/authentication/loginView";
 import RegisterView from "../../features/authentication/registerView";
 import PostFormView from "../../features/postFormView";
+import { useAuth } from "../../utils/authContext";
 
 const Body = () => {
+  const { isAuthenticated } = useAuth();
   return (
     <div>
       <Routes>
@@ -15,8 +17,14 @@ const Body = () => {
         <Route path="/login" element={<LoginView />} />
         <Route path="/register" element={<RegisterView />} />
         <Route path="/profile/:id" element={<ProfileView />} />
-        <Route path="/post/:id" element={<PostView />} />
-        <Route path="/post/create/" element={<PostFormView />} />
+        <Route
+          path="/post/:id"
+          element={isAuthenticated ? <PostView /> : <LoginView />}
+        />
+        <Route
+          path="/post/create/"
+          element={isAuthenticated ? <PostFormView /> : <LoginView />}
+        />
         <Route path="/post/update/:id" element={<PostFormView />} />
       </Routes>
     </div>
