@@ -54,6 +54,15 @@ export const loginUser = async (username, password) => {
   return response.data;
 };
 
+export const registerUser = async (postData) => {
+  const response = await axiosInstance.post("/user/register", postData);
+  return response.data;
+};
+
+export const loginWithGoogle = () => {
+  window.location.href = "http://localhost:3000/auth/google";
+};
+
 export const logoutUser = async () => {
   const response = await axiosInstance.get("/logout");
   return response.data;

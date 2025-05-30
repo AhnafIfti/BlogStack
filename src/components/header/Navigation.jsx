@@ -1,6 +1,7 @@
 import { useLogout } from "../../hooks/useLogout";
-import { Navbar, Nav, Container } from "react-bootstrap";
+import { Navbar, Nav, Container, Image } from "react-bootstrap";
 import { useAuth } from "../../utils/authContext";
+import UserProfilePicture from "../header/UserProfilePicture";
 
 const Navigate = () => {
   const { isAuthenticated, loggedInUser } = useAuth();
@@ -25,11 +26,23 @@ const Navigate = () => {
           <Nav>
             {isAuthenticated && loggedInUser ? (
               <>
+                {loggedInUser?.profilePicture && (
+                  <Nav.Link>
+                    <UserProfilePicture
+                      src={loggedInUser?.profilePicture}
+                      alt="Profile"
+                      size={25}
+                    />
+                  </Nav.Link>
+                )}
                 <Nav.Link>{loggedInUser.username}</Nav.Link>
                 <Nav.Link onClick={logout}>Logout</Nav.Link>
               </>
             ) : (
-              <Nav.Link href="/login">Login</Nav.Link>
+              <>
+                <Nav.Link href="/login">Login</Nav.Link>
+                <Nav.Link href="/register">Register</Nav.Link>
+              </>
             )}
           </Nav>
         </Navbar.Collapse>

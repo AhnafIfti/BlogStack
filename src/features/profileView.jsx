@@ -2,8 +2,10 @@ import Profile from "../components/body/bodyComponents/profile";
 import { getProfileDetail } from "../utils/axios-utils";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { useAuth } from "../utils/authContext";
 
 const ProfileView = () => {
+  const { isAuthenticated, loggedInUser } = useAuth();
   const { id } = useParams();
   const [data, setData] = useState({ postList: [] });
   const [loading, setLoading] = useState(true);
@@ -29,7 +31,11 @@ const ProfileView = () => {
 
   return (
     <div>
-      <Profile profile={data} />
+      <Profile
+        profile={data}
+        isAuthenticated={isAuthenticated}
+        loggedInUser={loggedInUser}
+      />
     </div>
   );
 };

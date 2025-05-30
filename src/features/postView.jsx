@@ -24,7 +24,7 @@ const PostView = () => {
 
   useEffect(() => {
     fetchPost(id);
-  }, [id, isAuthenticated]);
+  }, [id, isAuthenticated, loggedInUser]);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;

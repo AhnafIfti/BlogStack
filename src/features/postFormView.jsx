@@ -39,10 +39,6 @@ const PostFormView = () => {
     }
   };
 
-  useEffect(() => {
-    console.log(initialData);
-  }, [initialData]);
-
   return (
     <PostForm
       onSubmit={handleSubmit}
