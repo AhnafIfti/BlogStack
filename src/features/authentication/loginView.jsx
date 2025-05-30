@@ -10,7 +10,8 @@ const LoginView = () => {
     try {
       const result = await loginUser(username, password);
       if (result.success) {
-        authUpdate(result.userId);
+        // authUpdate(result.userId);
+        authUpdate();
         navigate(`/profile/${result.userId}`);
       } else {
         console.error(result.message);

@@ -5,12 +5,10 @@ import { UserRegister } from "../../components/body/bodyComponents/authenticatio
 
 const RegisterView = () => {
   const navigate = useNavigate();
-  //   const { authUpdate } = useAuth();
   const handleSubmit = async (postData) => {
     try {
       const result = await registerUser(postData);
       if (result.success) {
-        // authUpdate(result.userId);
         navigate(`/login`);
         console.log(result);
       } else {

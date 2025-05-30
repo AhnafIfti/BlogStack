@@ -10,7 +10,8 @@ export const useLogout = () => {
     try {
       const result = await logoutUser();
       if (result.success) {
-        authUpdate(null);
+        // authUpdate(null);
+        authUpdate();
         navigate("/login");
       }
     } catch (err) {

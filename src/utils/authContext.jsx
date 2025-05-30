@@ -6,7 +6,6 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loggedInUser, setUser] = useState(null);
-  const [trigger, setTrigger] = useState(false);
 
   const checkSession = async () => {
     try {
@@ -22,12 +21,22 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     checkSession();
-  }, [trigger]);
+  }, []);
 
-  const authUpdate = (user) => {
-    setIsAuthenticated(!!user);
-    setUser(user);
-    setTrigger(true);
+  const authUpdate = async () => {
+    // const authUpdate = async (user) => {
+    //setIsAuthenticated(!!user);
+    //setUser(user);
+    try {
+      const result = await checkAuth();
+      setIsAuthenticated(result.success);
+      setUser(result.user || null);
+    } catch (err) {
+      console.log(err);
+      setIsAuthenticated(false);
+      setUser(null);
+    }
+    // setTrigger(true);
   };
 
   return (
@@ -35,7 +44,8 @@ export const AuthProvider = ({ children }) => {
       value={{
         isAuthenticated,
         loggedInUser,
-        authUpdate: (user) => authUpdate(user),
+        authUpdate: () => authUpdate(),
+        // authUpdate: (user) => authUpdate(user),
       }}
     >
       {children}
